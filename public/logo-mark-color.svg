@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  
+  
+  <path d="M 12 12 L 12 88 L 88 88 L 88 56" stroke="#E6E8EF" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"></path>
+  
+  <g transform="translate(8 -4) rotate(-3 50 30)">
+    <path d="M 12 12 L 88 12 L 88 56" stroke="#46E49E" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"></path>
+  </g>
+  
+  <rect x="84" y="48" width="3" height="3" fill="#46E49E"></rect>
+  <rect x="78" y="52" width="2" height="2" fill="#46E49E" fill-opacity="0.6"></rect>
+  <rect x="72" y="46" width="2" height="2" fill="#46E49E" fill-opacity="0.4"></rect>
+</svg>

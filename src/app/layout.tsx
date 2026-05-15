@@ -1,39 +1,52 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({
-  variable: "--font-geist",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-mono-2",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Parabreak — The meta engine for Godot",
+  title: "parabreak — the meta engine for Godot",
   description:
-    "30 fourth-wall hooks across save manipulation, UI deconstruction, and OS-layer narrative. Built for Godot 4.x. Free Core. Paid Hooks and Plus.",
+    "Parabreak is a runtime layer that gives your characters access to the things outside the game — the save file, the menu, the player's last session, the system clock. 35 typed hooks for Godot 4.x.",
   metadataBase: new URL("https://parabreak.com"),
+  icons: {
+    icon: [
+      { url: "/favicon-32.svg", type: "image/svg+xml", sizes: "32x32" },
+      { url: "/favicon-16.svg", type: "image/svg+xml", sizes: "16x16" },
+    ],
+    apple: [{ url: "/apple-touch-icon.svg", sizes: "180x180" }],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
-    title: "Parabreak — The meta engine for Godot",
+    title: "parabreak — the meta engine for Godot",
     description:
-      "30 fourth-wall hooks across save manipulation, UI deconstruction, and OS-layer narrative.",
+      "Build games that notice you back. 35 typed hooks across save, dialogue, UI, and OS-layer narrative for Godot 4.x.",
     url: "https://parabreak.com",
-    siteName: "Parabreak",
+    siteName: "parabreak",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Parabreak — The meta engine for Godot",
+    title: "parabreak — the meta engine for Godot",
     description:
-      "30 fourth-wall hooks for Godot 4.x. Free Core. Paid Hooks and Plus.",
+      "Build games that notice you back. 35 typed hooks for Godot 4.x. Free Core. Paid Hooks and Plus.",
   },
 };
 
@@ -45,7 +58,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${ibmPlexMono.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -56,7 +69,7 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
       </head>
-      <body className="min-h-full">{children}</body>
+      <body className="theme-dark">{children}</body>
     </html>
   );
 }
