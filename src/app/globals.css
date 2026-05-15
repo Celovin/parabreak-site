@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --bg-deep: #0a0b0f;
+  --bg-surface: #151821;
+  --fg-primary: #e6e8ef;
+  --fg-muted: #8b8f9b;
+  --accent-phos: #46e49e;
+  --accent-hot: #e44c4c;
+  --glitch-violet: #7b3fe4;
+  --border: oklch(22% 0.012 250);
+}
+
+@theme inline {
+  --color-bg: var(--bg-deep);
+  --color-bg-surface: var(--bg-surface);
+  --color-fg: var(--fg-primary);
+  --color-fg-muted: var(--fg-muted);
+  --color-accent: var(--accent-phos);
+  --color-accent-hot: var(--accent-hot);
+  --color-glitch: var(--glitch-violet);
+  --color-border: var(--border);
+  --font-sans: var(--font-geist), "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "JetBrains Mono", Menlo, monospace;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--fg-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in oklch, var(--accent-phos) 28%, transparent);
+  color: var(--fg-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-phos);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
