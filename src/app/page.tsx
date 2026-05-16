@@ -53,6 +53,16 @@ function BrokenFrameMark({
   );
 }
 
+function LangSwitcher() {
+  return (
+    <div style={{ display: "flex", gap: 6, fontFamily: "var(--f-mono)", fontSize: 11, color: "var(--mute)" }}>
+      <span style={{ padding: "2px 6px", border: "1px solid var(--green)", color: "var(--green)" }}>EN</span>
+      <a href="/ko" style={{ padding: "2px 6px", border: "1px solid var(--line-2)" }}>KO</a>
+      <a href="/ja" style={{ padding: "2px 6px", border: "1px solid var(--line-2)" }}>JA</a>
+    </div>
+  );
+}
+
 function Nav({
   theme,
   setTheme,
@@ -73,11 +83,12 @@ function Nav({
           <a href="#what">What</a>
           <a href="#breaks">Breaks</a>
           <a href="#hooks">Hooks</a>
-          <a href="#korean">한국어</a>
+          <a href="#korean">Korea</a>
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
         </div>
         <div className="nav-right">
+          <LangSwitcher />
           <span className="ver">
             <span className="acc">v0.1</span> · Godot 4.x
           </span>
@@ -778,42 +789,42 @@ function Hooks() {
   );
 }
 
-/* ===================== Korean ===================== */
+/* ===================== Korean market signal ===================== */
 function KoreanSection() {
   return (
     <section id="korean" className="korean">
       <div className="container korean-grid">
         <div>
           <div style={{ fontFamily: "var(--f-mono)", fontSize: 11, letterSpacing: "0.2em", color: "var(--mute)", textTransform: "uppercase", marginBottom: 18 }}>
-            <span style={{ color: "var(--green)" }}>04</span> · 한국 시장 신호
+            <span style={{ color: "var(--green)" }}>04</span> · Korean market signal
           </div>
           <h2>
-            한국에서 만든<br />
-            <span className="acc">메타 게임</span>을 위해.
+            For the meta games<br />
+            <span className="acc">made in Korea</span>.
           </h2>
           <p className="lead">
-            한국 인디 씬은 메타 픽션과 4번째 벽 깨기에 가장 빨리 반응하는 시장 중 하나입니다. <b>parabreak는 한국어 텍스트, 한글 시스템 메시지, 한국 인디 페스티벌 트랙</b>을 1순위로 지원합니다.
+            The Korean indie scene is one of the fastest markets to read meta-fiction and fourth-wall work. <b>parabreak treats Korean text, Hangul system messages, and Korean indie festival tracks</b> as first-class — not as an afterthought translation pass.
           </p>
 
           <div className="signals">
             <div className="sig">
               <span className="num">01</span>
-              <span><b>한글 narration</b> · 자모 단위 text_corrupt · 띄어쓰기 보존</span>
+              <span><b>Hangul narration</b> · jamo-level text_corrupt · whitespace preserved</span>
               <span className="arrow">→</span>
             </div>
             <div className="sig">
               <span className="num">02</span>
-              <span><b>BIC · 인디크래프트</b> 부스 자료 템플릿 · 트레일러 자막</span>
+              <span><b>BIC · IndieCraft</b> booth-asset templates · trailer subtitles</span>
               <span className="arrow">→</span>
             </div>
             <div className="sig">
               <span className="num">03</span>
-              <span><b>text_i18n</b> 블록 · 한국어 시나리오 변형 동시 번역</span>
+              <span><b>text_i18n</b> block · Korean scenario variants alongside the source</span>
               <span className="arrow">→</span>
             </div>
             <div className="sig">
               <span className="num">04</span>
-              <span><b>한국어 docs</b> · 첫 출시일부터 동시 번역</span>
+              <span><b>Korean docs</b> · shipped on day one, not three months later</span>
               <span className="arrow">→</span>
             </div>
           </div>
@@ -821,13 +832,13 @@ function KoreanSection() {
 
         <div className="korean-side">
           <div className="stamp">// SIGNAL 01 · DEV NOTE</div>
-          <h4>왜 한국부터?</h4>
+          <h4>Why Korea first?</h4>
           <p>
-            메타 게임의 임팩트는 <b>&quot;개발자가 나를 본다&quot;</b>는 감각에서 옵니다. 그 감각은 번역체에서 절반쯤 죽습니다. parabreak의 첫 출시는 영어와 한국어를 동시에, 같은 품질로 다룹니다 — 한국 개발자가 영어로 번역해 출시하는 게임에서도, 한국어 원문 게임에서도, 같은 hook이 자연스럽게 동작하도록.
+            The meta-game lands on the feeling that <b>the developer is looking at you</b>. That feeling dies halfway through a translation pass. parabreak ships English and Korean side by side at launch, at the same quality — so a Korean studio shipping in English, and a Korean-language original, both get the same hook firing naturally.
           </p>
           <hr />
           <div className="qt">
-            &quot;한국 인디씬은 시스템 자체를 의심하는 게임에 관대하다. 그래서 메타 엔진의 첫 검증은 여기서 한다.&quot;
+            &apos;The Korean indie scene is unusually generous with games that question the system itself. So the meta engine&apos;s first proof gets built here.&apos;
             <cite>— team note, 2026.04</cite>
           </div>
         </div>
