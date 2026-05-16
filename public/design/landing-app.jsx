@@ -14,7 +14,7 @@ function UnderEngine() {
           <div className="mark"><span className="badge">PLUGIN</span> Dialogic 2 ready</div>
           <div className="mark"><span className="badge">LICENSE</span> MIT core</div>
           <div className="mark"><span className="badge">PLATFORMS</span> win · mac · linux</div>
-          <div className="mark"><span className="badge">BUILT WITH</span> KNOT (early access)</div>
+          <div className="mark"><span className="badge">BUILT WITH</span> an indie VN (early access)</div>
         </div>
       </div>
     </section>

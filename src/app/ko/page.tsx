@@ -443,9 +443,6 @@ function UnderEngine() {
           <div className="mark">
             <span className="badge">플랫폼</span> win · mac · linux
           </div>
-          <div className="mark">
-            <span className="badge">제작 사례</span> KNOT (얼리액세스)
-          </div>
         </div>
       </div>
     </section>

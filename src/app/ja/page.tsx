@@ -443,9 +443,6 @@ function UnderEngine() {
           <div className="mark">
             <span className="badge">プラットフォーム</span> win · mac · linux
           </div>
-          <div className="mark">
-            <span className="badge">使用作品</span> KNOT(早期アクセス)
-          </div>
         </div>
       </div>
     </section>

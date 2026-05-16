@@ -453,9 +453,6 @@ function UnderEngine() {
           <div className="mark">
             <span className="badge">PLATFORMS</span> win · mac · linux
           </div>
-          <div className="mark">
-            <span className="badge">BUILT WITH</span> KNOT (early access)
-          </div>
         </div>
       </div>
     </section>
