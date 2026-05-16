@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>parabreak — manifesto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #0A0B0F; --bg-2: #0F1116; --line: #1E2230; --line-2: #2A2F40;
+  --ink: #E6E8EF; --ink-2: #B4B8C5; --mute: #6B7080; --mute-2: #4A4F60;
+  --green: #46E49E; --amber: #F2B544; --violet: #8B5CF6; --red: #E44C4C;
+  --f-display: 'Space Grotesk', sans-serif;
+  --f-mono: 'JetBrains Mono', monospace;
+  --f-kr: 'Pretendard', sans-serif;
+  --max: 720px;
+  --pad: 32px;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-mono);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--green); color: var(--bg); }
+a { color: inherit; text-decoration: none; }
+
+/* scanlines, very subtle */
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 100;
+  background: repeating-linear-gradient(to bottom,
+    rgba(255,255,255,0.012) 0 1px, transparent 1px 3px);
+}
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 99;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.5) 100%);
+}
+
+/* head */
+.doc-head {
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0;
+  position: sticky;
+  top: 0;
+  background: rgba(10,11,15,0.92);
+  backdrop-filter: blur(10px);
+  z-index: 50;
+}
+.doc-head-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.doc-head .word {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  display: inline-flex;
+  align-items: baseline;
+}
+.doc-head .word .br {
+  color: var(--green);
+  display: inline-block;
+  transform: translateY(-2px) rotate(-3deg);
+  position: relative;
+}
+.doc-head .word .br::before {
+  content: ""; position: absolute; left: -2px; right: -1px; top: 50%;
+  height: 1px; background: var(--green);
+}
+.doc-head .title {
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute);
+}
+.doc-head .title .acc { color: var(--green); }
+.doc-head .back {
+  margin-left: auto;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute);
+}
+.doc-head .back:hover { color: var(--green); }
+
+/* mast */
+.mast {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 88px var(--pad) 56px;
+  position: relative;
+}
+.mast .stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 28px;
+}
+.mast .stamp .line { display: inline-block; width: 24px; height: 1px; background: var(--green); }
+.mast .stamp .num { color: var(--green); }
+.mast h1 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 80px;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  margin: 0;
+  color: var(--ink);
+}
+.mast h1 .br {
+  color: var(--green);
+  display: inline-block;
+  transform: translateY(-0.06em) rotate(-3deg);
+  position: relative;
+}
+.mast h1 .br::before {
+  content: "";
+  position: absolute;
+  left: -0.05em; right: -0.02em; top: 50%;
+  height: 0.04em; background: var(--green);
+}
+.mast .super {
+  font-family: var(--f-mono);
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+
+/* body — typographic, hand-set */
+.body {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px var(--pad) 32px;
+}
+.body section {
+  border-top: 1px solid var(--line);
+  padding: 48px 0 12px;
+}
+.body section:first-child { border-top: none; padding-top: 0; }
+.body .num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.body .num .line { display: inline-block; width: 24px; height: 1px; background: var(--green); }
+.body h2 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0 0 22px;
+  color: var(--ink);
+  max-width: 600px;
+}
+.body p {
+  font-family: var(--f-mono);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin: 0 0 18px;
+  max-width: 640px;
+}
+.body p b { color: var(--ink); font-weight: 500; }
+.body p .strike {
+  color: var(--mute);
+  position: relative;
+}
+.body p .strike::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 52%;
+  height: 1.5px; background: var(--red);
+}
+.body p .acc { color: var(--green); }
+
+.body p .pull {
+  font-family: var(--f-display);
+  font-style: normal;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  line-height: 1.4;
+  display: block;
+  border-left: 2px solid var(--green);
+  padding-left: 20px;
+  margin: 28px 0 28px;
+}
+
+/* not / will / will-not list */
+.body ul.willnot {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.body ul.willnot li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 14px;
+  align-items: baseline;
+  font-family: var(--f-mono);
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.65;
+}
+.body ul.willnot li .x { color: var(--red); font-size: 14px; }
+.body ul.willnot li b { color: var(--ink); font-weight: 500; }
+
+.body ul.will {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.body ul.will li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 14px;
+  align-items: baseline;
+  font-family: var(--f-mono);
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.65;
+}
+.body ul.will li .plus { color: var(--green); font-size: 14px; }
+.body ul.will li b { color: var(--ink); font-weight: 500; }
+
+/* Korean section */
+.body section.kr h2 {
+  font-family: var(--f-kr);
+  font-size: 36px;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+.body section.kr p {
+  font-family: var(--f-kr);
+  font-size: 16px;
+  line-height: 1.85;
+}
+.body section.kr p .pull {
+  font-family: var(--f-kr);
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+/* signoff */
+.signoff {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 48px var(--pad) 80px;
+  border-top: 1px solid var(--line);
+}
+.signoff .stamp-bot {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 20px;
+}
+.signoff .stamp-bot .acc { color: var(--green); }
+.signoff .sig {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 36px;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: baseline;
+}
+.signoff .sig .br {
+  color: var(--green);
+  display: inline-block;
+  transform: translateY(-3px) rotate(-3deg);
+  position: relative;
+}
+.signoff .sig .br::before {
+  content: ""; position: absolute; left: -2px; right: -1px; top: 50%;
+  height: 1.5px; background: var(--green);
+}
+.signoff p.cred {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 16px 0 0;
+}
+.signoff p.cred .acc { color: var(--green); }
+
+/* foot */
+.doc-foot {
+  padding: 32px var(--pad) 56px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mute);
+  text-align: center;
+}
+.doc-foot a { display: inline-block; margin: 0 12px; color: var(--mute); }
+.doc-foot a:hover { color: var(--green); }
+
+@media (max-width: 720px) {
+  :root { --pad: 22px; }
+  .mast { padding: 60px var(--pad) 32px; }
+  .mast h1 { font-size: 48px; }
+  .body section { padding: 36px 0 8px; }
+  .body h2 { font-size: 24px; }
+  .body section.kr h2 { font-size: 26px; }
+  .signoff .sig { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <div class="doc-head-inner">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <svg width="26" height="26" viewBox="0 0 100 100" fill="none">
+        <path d="M 12 12 L 12 88 L 88 88 L 88 56" stroke="#E6E8EF" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+        <g transform="translate(8 -4) rotate(-3 50 30)">
+          <path d="M 12 12 L 88 12 L 88 56" stroke="#46E49E" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+        </g>
+        <rect x="84" y="48" width="3" height="3" fill="#46E49E"/>
+        <rect x="78" y="52" width="2" height="2" fill="#46E49E" fill-opacity="0.6"/>
+        <rect x="72" y="46" width="2" height="2" fill="#46E49E" fill-opacity="0.4"/>
+      </svg>
+      <span class="word">para<span class="br">break</span></span>
+    </div>
+    <span class="title">// MANIFESTO · <span class="acc">v1.0</span></span>
+    <a class="back" href="landing.html">← landing</a>
+  </div>
+</header>
+
+<section class="mast">
+  <div class="stamp"><span class="line"></span><span class="num">·</span><span>MANIFESTO · 2026</span></div>
+  <div class="super">// the engine notices.</div>
+  <h1>The game<br/>looks <span class="br">back</span>.</h1>
+</section>
+
+<article class="body">
+
+  <section>
+    <div class="num"><span class="line"></span><span>·</span><span>01 · WHAT WE ARE BUILDING</span></div>
+    <h2>An engine that knows it's an engine.</h2>
+    <p>
+      Most game runtimes pretend the player is somewhere else — beyond the window, behind a fourth wall, neutralized into a controller input. Parabreak takes the opposite position. <b>The player is inside the system.</b> The save file is on their disk. The cursor is in their hand. The game knows what year it is. We expose those seams as primitives, not exceptions.
+    </p>
+    <p>
+      <span class="pull">A meta moment in 2026 should not require 200 lines of file IO. It should be one block in a scenario file. That is the entire project.</span>
+    </p>
+  </section>
+
+  <section>
+    <div class="num"><span class="line"></span><span>·</span><span>02 · WHAT WE WILL DO</span></div>
+    <h2>Three commitments.</h2>
+    <ul class="will">
+      <li><span class="plus">+</span><div><b>Ship typed blocks, not magic.</b> Every effect is a named JSON object with documented args. If a hook can't be reproduced from its scenario file, it doesn't ship.</div></li>
+      <li><span class="plus">+</span><div><b>Track Godot, not the other way around.</b> Parabreak is an addon, never a fork. When 4.x moves, we move with it. Your project upgrades; ours does too.</div></li>
+      <li><span class="plus">+</span><div><b>Treat Korean as primary, not localized.</b> Hangul jamo-level <code style="background:var(--bg-2);border:1px solid var(--line);padding:1px 6px;color:var(--green);font-size:13px;">text_corrupt</code>. Festival kits. Docs translated by the team, day one. The meta-fiction reading is sharper here — we go where the reading is sharpest.</div></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="num"><span class="line"></span><span>·</span><span>03 · WHAT WE WILL NOT DO</span></div>
+    <h2>Four lines we will not cross.</h2>
+    <ul class="willnot">
+      <li><span class="x">×</span><div><b>Phishing dressed as fourth-wall.</b> <code style="background:var(--bg-2);border:1px solid var(--line);padding:1px 6px;color:var(--green);font-size:13px;">fake_dialog</code> ships with a safe-mode watermark by default. If your scenario tries to deceive the player into actual harm, the loader refuses.</div></li>
+      <li><span class="x">×</span><div><b>Trademark cosplay.</b> No Undertale, no DDLC, no Inscryption, no Pony Island. We borrow the <em>posture</em> from games we admire; the marks belong to their makers.</div></li>
+      <li><span class="x">×</span><div><b>Subscription rent.</b> One-time payment. The blocks you bought are yours. When you ship, you owe us nothing. Royalty zero. Forever.</div></li>
+      <li><span class="x">×</span><div><b>Hidden price hikes.</b> Prices rise after the Steam launch and we say so on every commerce surface. Buy now if you want now's price. We will not sneak it.</div></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="num"><span class="line"></span><span>·</span><span>04 · WHO THIS IS FOR</span></div>
+    <h2>The developer who's already tired of the workaround.</h2>
+    <p>
+      You've shipped — or wanted to ship — a moment where the character glances at the camera. Where the save file matters in the story. Where the menu lies on purpose. You wrote 200 lines to make it work for one frame, and you'd write 200 more for the next one. <b>You're the audience.</b>
+    </p>
+    <p>
+      If you're looking for an "AI narrative engine," parabreak isn't it. We're the opposite — every hook is a hand-written block, deterministic, debuggable, replayable. The drama is in the design, not the dice.
+    </p>
+  </section>
+
+  <section class="kr">
+    <div class="num"><span class="line"></span><span>·</span><span>05 · 한국어</span></div>
+    <h2>한국부터 시작하는 이유.</h2>
+    <p>
+      메타 게임의 임팩트는 <b>"개발자가 나를 본다"</b>는 감각에서 옵니다. 그 감각은 번역체에서 절반쯤 죽습니다. parabreak는 한국어를 영어 뒤에 붙이지 않습니다.
+    </p>
+    <p>
+      <span class="pull">한국 인디씬은 시스템 자체를 의심하는 게임에 관대합니다. 그래서 메타 엔진의 첫 검증은 여기서 합니다.</span>
+    </p>
+    <p>
+      한글 자모 단위 <code style="background:var(--bg-2);border:1px solid var(--line);padding:1px 6px;color:var(--green);font-size:13px;font-family:'IBM Plex Mono',monospace;">text_corrupt</code>, <code style="background:var(--bg-2);border:1px solid var(--line);padding:1px 6px;color:var(--green);font-size:13px;font-family:'IBM Plex Mono',monospace;">text_i18n</code> 시나리오 변형, 한국어 docs · 인디크래프트/BIC 부스 자료까지. 영어로 시작해서 번역하는 게 아니라, 같은 품질을 두 언어로 동시에. 그게 출시 조건입니다.
+    </p>
+  </section>
+
+  <section>
+    <div class="num"><span class="line"></span><span>·</span><span>06 · THE SHAPE</span></div>
+    <h2>Small, on purpose.</h2>
+    <p>
+      We could broaden. We could become a meta-narrative platform, a creator economy, a content pipeline. We are not going to. Parabreak is a <b>thirty-five-block library</b> with one job: make the engine notice. When the engine notices, your story has somewhere new to go.
+    </p>
+    <p>
+      That's the whole pitch. If we ever say more, we've lost the plot.
+    </p>
+  </section>
+
+</article>
+
+<section class="signoff">
+  <div class="stamp-bot">// signed · <span class="acc">2026</span></div>
+  <div class="sig">para<span class="br">break</span></div>
+  <p class="cred">v0.1 public alpha · <span class="acc">35 blocks</span> · MIT core · prices rise after Steam launch</p>
+</section>
+
+<footer class="doc-foot">
+  <a href="landing.html">→ landing</a>
+  <a href="brand.html">→ brand</a>
+  <a href="changelog.html">→ changelog</a>
+  <a href="tokens.html">→ tokens</a>
+</footer>
+
+</body>
+</html>

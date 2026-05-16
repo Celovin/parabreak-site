@@ -70,41 +70,65 @@ function Nav({
   theme: "dark" | "light";
   setTheme: (t: "dark" | "light") => void;
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const close = () => setMenuOpen(false);
   return (
-    <nav className="nav">
-      <div className="container nav-inner">
-        <div className="nav-logo">
-          <BrokenFrameMark size={28} stroke={8} />
-          <span className="word">
-            para<span className="br">break</span>
-          </span>
+    <>
+      <nav className="nav">
+        <div className="container nav-inner">
+          <div className="nav-logo">
+            <BrokenFrameMark size={28} stroke={8} />
+            <span className="word">
+              para<span className="br">break</span>
+            </span>
+          </div>
+          <div className="nav-links">
+            <a href="#what">소개</a>
+            <a href="#breaks">깨지는 곳</a>
+            <a href="#hooks">훅</a>
+            <a href="#korean">한국 시장</a>
+            <a href="#pricing">가격</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div className="nav-right">
+            <LangSwitcher />
+            <span className="ver">
+              <span className="acc">v0.1</span> · Godot 4.x
+            </span>
+            <button
+              className="theme-toggle"
+              aria-label="테마 전환"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              <span className="knob"></span>
+            </button>
+            <a href="#" className="btn primary">
+              설치 <span className="arrow">→</span>
+            </a>
+            <button className="hamburger" aria-label="메뉴 열기" onClick={() => setMenuOpen(true)}>
+              <span className="bars"><span></span><span></span><span></span></span>
+              메뉴
+            </button>
+          </div>
         </div>
-        <div className="nav-links">
-          <a href="#what">소개</a>
-          <a href="#breaks">깨지는 곳</a>
-          <a href="#hooks">훅</a>
-          <a href="#korean">한국 시장</a>
-          <a href="#pricing">가격</a>
-          <a href="#faq">FAQ</a>
+      </nav>
+      {menuOpen && (
+        <div className="mobile-menu open" role="dialog" aria-modal="true">
+          <button className="close" onClick={close}>닫기 ×</button>
+          <a href="#what" onClick={close}>소개</a>
+          <a href="#breaks" onClick={close}>깨지는 곳</a>
+          <a href="#hooks" onClick={close}>훅</a>
+          <a href="#korean" onClick={close}>한국 시장</a>
+          <a href="#pricing" onClick={close}>가격</a>
+          <a href="#faq" onClick={close}>FAQ</a>
+          <div className="switch">
+            <a href="/">EN</a>
+            <span className="active">KO</span>
+            <a href="/ja">JA</a>
+          </div>
         </div>
-        <div className="nav-right">
-          <LangSwitcher />
-          <span className="ver">
-            <span className="acc">v0.1</span> · Godot 4.x
-          </span>
-          <button
-            className="theme-toggle"
-            aria-label="테마 전환"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            <span className="knob"></span>
-          </button>
-          <a href="#" className="btn primary">
-            설치 <span className="arrow">→</span>
-          </a>
-        </div>
-      </div>
-    </nav>
+      )}
+    </>
   );
 }
 
@@ -222,6 +246,11 @@ function HeroAnim() {
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(true);
   const tRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setPlaying(false);
+    }
+  }, []);
   useEffect(() => {
     if (!playing) return;
     tRef.current = setTimeout(() => setStep((s) => (s + 1) % STEPS.length), STEPS[step].dur);
@@ -1061,7 +1090,7 @@ function Footer() {
               <li><a href="#">설치</a></li>
               <li><a href="#">훅 레퍼런스</a></li>
               <li><a href="#">시나리오 포맷</a></li>
-              <li><a href="#">체인지로그</a></li>
+              <li><a href="/design/changelog.html">체인지로그</a></li>
             </ul>
           </div>
           <div className="foot-col">
@@ -1086,7 +1115,8 @@ function Footer() {
             <h5>회사</h5>
             <ul>
               <li><a href="#">팀</a></li>
-              <li><a href="#">매니페스토</a></li>
+              <li><a href="/design/manifesto.html">매니페스토</a></li>
+              <li><a href="/design/brand.html">브랜드 시스템</a></li>
               <li><a href="#">프레스 키트</a></li>
               <li><a href="#">연락</a></li>
             </ul>

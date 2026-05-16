@@ -70,41 +70,65 @@ function Nav({
   theme: "dark" | "light";
   setTheme: (t: "dark" | "light") => void;
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const close = () => setMenuOpen(false);
   return (
-    <nav className="nav">
-      <div className="container nav-inner">
-        <div className="nav-logo">
-          <BrokenFrameMark size={28} stroke={8} />
-          <span className="word">
-            para<span className="br">break</span>
-          </span>
+    <>
+      <nav className="nav">
+        <div className="container nav-inner">
+          <div className="nav-logo">
+            <BrokenFrameMark size={28} stroke={8} />
+            <span className="word">
+              para<span className="br">break</span>
+            </span>
+          </div>
+          <div className="nav-links">
+            <a href="#what">概要</a>
+            <a href="#breaks">壊れる所</a>
+            <a href="#hooks">フック</a>
+            <a href="#korean">韓国市場</a>
+            <a href="#pricing">価格</a>
+            <a href="#faq">FAQ</a>
+          </div>
+          <div className="nav-right">
+            <LangSwitcher />
+            <span className="ver">
+              <span className="acc">v0.1</span> · Godot 4.x
+            </span>
+            <button
+              className="theme-toggle"
+              aria-label="テーマ切替"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              <span className="knob"></span>
+            </button>
+            <a href="#" className="btn primary">
+              インストール <span className="arrow">→</span>
+            </a>
+            <button className="hamburger" aria-label="メニューを開く" onClick={() => setMenuOpen(true)}>
+              <span className="bars"><span></span><span></span><span></span></span>
+              メニュー
+            </button>
+          </div>
         </div>
-        <div className="nav-links">
-          <a href="#what">概要</a>
-          <a href="#breaks">壊れる所</a>
-          <a href="#hooks">フック</a>
-          <a href="#korean">韓国市場</a>
-          <a href="#pricing">価格</a>
-          <a href="#faq">FAQ</a>
+      </nav>
+      {menuOpen && (
+        <div className="mobile-menu open" role="dialog" aria-modal="true">
+          <button className="close" onClick={close}>閉じる ×</button>
+          <a href="#what" onClick={close}>概要</a>
+          <a href="#breaks" onClick={close}>壊れる所</a>
+          <a href="#hooks" onClick={close}>フック</a>
+          <a href="#korean" onClick={close}>韓国市場</a>
+          <a href="#pricing" onClick={close}>価格</a>
+          <a href="#faq" onClick={close}>FAQ</a>
+          <div className="switch">
+            <a href="/">EN</a>
+            <a href="/ko">KO</a>
+            <span className="active">JA</span>
+          </div>
         </div>
-        <div className="nav-right">
-          <LangSwitcher />
-          <span className="ver">
-            <span className="acc">v0.1</span> · Godot 4.x
-          </span>
-          <button
-            className="theme-toggle"
-            aria-label="テーマ切替"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            <span className="knob"></span>
-          </button>
-          <a href="#" className="btn primary">
-            インストール <span className="arrow">→</span>
-          </a>
-        </div>
-      </div>
-    </nav>
+      )}
+    </>
   );
 }
 
@@ -222,6 +246,11 @@ function HeroAnim() {
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(true);
   const tRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setPlaying(false);
+    }
+  }, []);
   useEffect(() => {
     if (!playing) return;
     tRef.current = setTimeout(() => setStep((s) => (s + 1) % STEPS.length), STEPS[step].dur);
@@ -1061,7 +1090,7 @@ function Footer() {
               <li><a href="#">インストール</a></li>
               <li><a href="#">フックリファレンス</a></li>
               <li><a href="#">シナリオ形式</a></li>
-              <li><a href="#">変更履歴</a></li>
+              <li><a href="/design/changelog.html">変更履歴</a></li>
             </ul>
           </div>
           <div className="foot-col">
@@ -1086,7 +1115,8 @@ function Footer() {
             <h5>運営</h5>
             <ul>
               <li><a href="#">チーム</a></li>
-              <li><a href="#">マニフェスト</a></li>
+              <li><a href="/design/manifesto.html">マニフェスト</a></li>
+              <li><a href="/design/brand.html">ブランドシステム</a></li>
               <li><a href="#">プレスキット</a></li>
               <li><a href="#">連絡</a></li>
             </ul>

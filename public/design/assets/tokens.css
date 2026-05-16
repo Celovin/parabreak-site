@@ -1,0 +1,173 @@
+/* =====================================================================
+   parabreak / tokens.css
+   ---------------------------------------------------------------------
+   Single source of truth for color · type · spacing · radius · motion.
+   All site CSS reads from these variables. Light mode swaps values,
+   never adds new names. Theme is controlled by a class on <html> or
+   <body>: theme-dark (default) | theme-light.
+
+   Same file is consumed by:
+     · vanilla CSS (landing.css, brand.css, etc.)
+     · Tailwind 4  (via @theme inline in app.css)
+
+   v1.0 · 2026-05
+   ===================================================================== */
+
+:root,
+.theme-dark {
+  /* ---------- color · surfaces ---------- */
+  --color-bg:        #0A0B0F;
+  --color-bg-2:      #0F1116;
+  --color-panel:     #151821;
+
+  /* ---------- color · lines ---------- */
+  --color-line:      #1E2230;
+  --color-line-2:    #2A2F40;
+
+  /* ---------- color · text ---------- */
+  --color-ink:       #E6E8EF;
+  --color-ink-2:     #B4B8C5;
+  --color-mute:      #6B7080;
+  --color-mute-2:    #4A4F60;
+
+  /* ---------- color · accent (semantic, theme-shared) ---------- */
+  --color-green:     #46E49E;
+  --color-green-dim: #2A8F62;
+  --color-amber:     #F2B544;
+  --color-violet:    #8B5CF6;
+  --color-red:       #E44C4C;
+
+  /* ---------- type · families ---------- */
+  --font-display:  'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:     'JetBrains Mono', ui-monospace, monospace;
+  --font-mono-2:   'IBM Plex Mono', ui-monospace, monospace;
+  --font-kr:       'Pretendard', ui-sans-serif, system-ui, sans-serif;
+
+  /* ---------- type · scale (px values; px > rem here for design fidelity) ---------- */
+  --text-h1:       88px;
+  --text-h1-mob:   44px;
+  --text-h2:       56px;
+  --text-h2-mob:   32px;
+  --text-h3:       28px;
+  --text-h3-mob:   22px;
+  --text-h4:       22px;
+  --text-h4-mob:   18px;
+  --text-body:     15px;
+  --text-mono:     13px;
+  --text-label:    11px;
+  --text-micro:    10px;
+
+  /* ---------- type · letter-spacing ---------- */
+  --ls-h1:    -0.045em;
+  --ls-h2:    -0.035em;
+  --ls-h3:    -0.02em;
+  --ls-h4:    -0.01em;
+  --ls-body:   0;
+  --ls-label:  0.2em;
+  --ls-kicker: 0.3em;
+
+  /* ---------- type · line-height ---------- */
+  --lh-h1:    0.96;
+  --lh-h2:    1.05;
+  --lh-h3:    1.2;
+  --lh-h4:    1.3;
+  --lh-body:  1.55;
+  --lh-label: 1.5;
+  --lh-kr:    1.15;
+
+  /* ---------- spacing · 4-base scale ---------- */
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:   12px;
+  --s-4:   16px;
+  --s-5:   24px;
+  --s-6:   32px;
+  --s-7:   48px;
+  --s-8:   64px;
+  --s-9:   96px;
+  --s-10:  128px;
+
+  /* ---------- layout ---------- */
+  --container-max:    1240px;
+  --container-pad:    24px;
+  --container-pad-mb: 20px;
+  --section-pad:      96px;
+  --section-pad-mb:   60px;
+
+  /* ---------- radius (we use square corners by default) ---------- */
+  --radius-0:  0px;
+  --radius-1:  2px;
+  --radius-2:  4px;
+  --radius-pill: 999px;
+
+  /* ---------- motion ---------- */
+  --motion-fast:   120ms;
+  --motion-base:   200ms;
+  --motion-slow:   320ms;
+  --easing-out:    cubic-bezier(0.2, 0.6, 0.2, 1);
+  --easing-in:     cubic-bezier(0.4, 0, 0.6, 1);
+
+  /* ---------- effects ---------- */
+  --scanline:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.012) 0 1px,
+      transparent 1px 3px
+    );
+  --vignette:
+    radial-gradient(
+      ellipse at center,
+      transparent 55%,
+      rgba(0,0,0,0.5) 100%
+    );
+
+  /* ---------- shadows (minimal — we mostly use 1px borders) ---------- */
+  --shadow-glow-green:
+    0 0 0 1px var(--color-green),
+    0 0 12px rgba(70, 228, 158, 0.35);
+}
+
+/* ===================================================================
+   Light mode override — same names, swapped values.
+   Apply by setting <html class="theme-light"> or <body class="theme-light">.
+   =================================================================== */
+.theme-light {
+  --color-bg:        #F4F4EE;
+  --color-bg-2:      #ECECE5;
+  --color-panel:     #FFFFFF;
+
+  --color-line:      #D8D8D0;
+  --color-line-2:    #C2C2BA;
+
+  --color-ink:       #0A0B0F;
+  --color-ink-2:     #2A2F40;
+  --color-mute:      #6B7080;
+  --color-mute-2:    #9095A2;
+
+  /* green dims for AA contrast on cream */
+  --color-green:     #1A8B5A;
+  --color-green-dim: #46E49E;
+  /* amber / violet / red stay identical — they read well on both bgs */
+
+  /* scanline + vignette are dark-only effects */
+  --scanline:        none;
+  --vignette:        none;
+}
+
+/* ===================================================================
+   Sensible defaults — minimal reset, theme-aware
+   =================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--color-green); color: var(--color-bg); }
+a { color: inherit; text-decoration: none; }

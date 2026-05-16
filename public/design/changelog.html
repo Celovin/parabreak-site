@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>parabreak — changelog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #0A0B0F; --bg-2: #0F1116; --line: #1E2230; --line-2: #2A2F40;
+  --ink: #E6E8EF; --ink-2: #B4B8C5; --mute: #6B7080; --mute-2: #4A4F60;
+  --green: #46E49E; --amber: #F2B544; --violet: #8B5CF6; --red: #E44C4C;
+  --f-display: 'Space Grotesk', sans-serif;
+  --f-mono: 'JetBrains Mono', monospace;
+  --max: 920px;
+  --pad: 32px;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--green); color: #0A0B0F; }
+a { color: inherit; text-decoration: none; }
+
+/* head */
+.doc-head {
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0;
+  position: sticky;
+  top: 0;
+  background: rgba(10,11,15,0.92);
+  backdrop-filter: blur(10px);
+  z-index: 50;
+}
+.doc-head-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.doc-head .word {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  display: inline-flex;
+  align-items: baseline;
+}
+.doc-head .word .br {
+  color: var(--green);
+  display: inline-block;
+  transform: translateY(-2px) rotate(-3deg);
+  position: relative;
+}
+.doc-head .word .br::before {
+  content: ""; position: absolute; left: -2px; right: -1px; top: 50%;
+  height: 1px; background: var(--green);
+}
+.doc-head .title {
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute);
+}
+.doc-head .title .acc { color: var(--green); }
+.doc-head .back {
+  margin-left: auto;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute);
+}
+.doc-head .back:hover { color: var(--green); }
+
+/* hero */
+.cl-hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 80px var(--pad) 60px;
+  border-bottom: 1px solid var(--line);
+}
+.cl-hero .kicker {
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--mute); display: inline-flex; align-items: center; gap: 14px;
+  margin-bottom: 22px;
+}
+.cl-hero .kicker .line { display: inline-block; width: 24px; height: 1px; background: var(--green); }
+.cl-hero .kicker .num { color: var(--green); }
+.cl-hero h1 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 56px;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--ink);
+}
+.cl-hero p {
+  font-size: 15px; line-height: 1.65; color: var(--ink-2);
+  max-width: 640px; margin: 22px 0 0;
+}
+.cl-hero p b { color: var(--ink); font-weight: 500; }
+
+/* entries */
+.entries {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 56px var(--pad) 80px;
+}
+.entry {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  padding: 36px 0 32px;
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.entry:first-child { border-top: none; padding-top: 8px; }
+.entry .side {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--mute);
+}
+.entry .side .ver {
+  display: block;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.entry .side .ver .acc { color: var(--green); }
+.entry .side .date {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 8px;
+}
+.entry .side .tag {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--line-2);
+  color: var(--mute);
+}
+.entry .side .tag.cycle { color: var(--green); border-color: var(--green); }
+.entry .side .tag.fix { color: var(--amber); border-color: var(--amber); }
+.entry .side .tag.brand { color: var(--violet); border-color: var(--violet); }
+.entry .side .tag.lock { color: var(--ink); border-color: var(--line-2); }
+
+.entry h3 {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.entry .summary {
+  font-size: 14px; color: var(--ink-2); line-height: 1.65;
+  margin: 0 0 18px;
+}
+.entry .summary b { color: var(--ink); font-weight: 500; }
+.entry ul {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.entry li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  align-items: baseline;
+}
+.entry li .glyph {
+  color: var(--green);
+  font-size: 11px;
+  text-align: center;
+}
+.entry li.fix .glyph { color: var(--amber); }
+.entry li.cut .glyph { color: var(--red); }
+.entry li code {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 1px 6px;
+  font-size: 12px;
+  color: var(--green);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.entry .files {
+  margin-top: 14px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--mute);
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.entry .files span.k { color: var(--mute-2); margin-right: 6px; letter-spacing: 0.16em; text-transform: uppercase; }
+.entry .files a {
+  color: var(--green);
+  border-bottom: 1px dashed var(--line-2);
+  padding: 1px 4px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+}
+.entry .files a:hover { border-color: var(--green); }
+
+/* foot */
+.cl-foot {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 32px var(--pad) 56px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mute);
+  text-align: center;
+}
+.cl-foot .acc { color: var(--green); }
+.cl-foot a {
+  display: inline-block;
+  margin: 0 12px;
+  color: var(--mute);
+}
+.cl-foot a:hover { color: var(--green); }
+
+@media (max-width: 720px) {
+  :root { --pad: 20px; }
+  .entry { grid-template-columns: 1fr; gap: 14px; }
+  .entry .side { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+  .entry .side .ver { font-size: 18px; }
+  .cl-hero h1 { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <div class="doc-head-inner">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <svg width="26" height="26" viewBox="0 0 100 100" fill="none">
+        <path d="M 12 12 L 12 88 L 88 88 L 88 56" stroke="#E6E8EF" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+        <g transform="translate(8 -4) rotate(-3 50 30)">
+          <path d="M 12 12 L 88 12 L 88 56" stroke="#46E49E" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+        </g>
+        <rect x="84" y="48" width="3" height="3" fill="#46E49E"/>
+        <rect x="78" y="52" width="2" height="2" fill="#46E49E" fill-opacity="0.6"/>
+        <rect x="72" y="46" width="2" height="2" fill="#46E49E" fill-opacity="0.4"/>
+      </svg>
+      <span class="word">para<span class="br">break</span></span>
+    </div>
+    <span class="title">// CHANGELOG · <span class="acc">v0.1 alpha</span></span>
+    <a class="back" href="landing.html">← landing</a>
+  </div>
+</header>
+
+<section class="cl-hero">
+  <div class="kicker"><span class="line"></span><span class="num">·</span><span>CHANGELOG · DESIGN SYSTEM</span></div>
+  <h1>What changed, when,<br/>and why we made the call.</h1>
+  <p>This log is for the design system, not the engine — engine commits live in the repo. Each entry locks a decision: <b>what was set</b>, <b>what was rejected</b>, and which files now hold the truth. Most recent first.</p>
+</section>
+
+<div class="entries">
+
+  <!-- Phase 2.A — cleanup -->
+  <article class="entry">
+    <div class="side">
+      <span class="ver">v1.2 · <span class="acc">PHASE 2.A</span></span>
+      <span class="date">2026-05-15</span>
+      <span class="tag cycle">cleanup</span>
+    </div>
+    <div>
+      <h3>Hero glitch · light-mode pass · changelog + manifesto</h3>
+      <p class="summary">Closing the four items deferred from earlier cycles. Hero's BREAK step now actually glitches; light mode reviewed end-to-end; the two dead footer links (Changelog, Manifesto) get real destinations.</p>
+      <ul>
+        <li><span class="glyph">+</span><div><b>Hero BREAK glitch tuned.</b> Added scanline pulse on portrait, RGB-split + flicker on body text, faint horizontal sweep, 1px x-axis jitter. Wrapped in <code>prefers-reduced-motion</code>.</div></li>
+        <li><span class="glyph">+</span><div><b>Light mode pass.</b> Reviewed hero, anim panel, hooks tabs, Korean section, pricing, FAQ, footer at <code>.theme-light</code>. No structural fixes needed — all surfaces honor token swap. AA contrast verified on accent green (#1A8B5A on cream).</div></li>
+        <li><span class="glyph">+</span><div><b>changelog.html</b> — this file. Footer link no longer dead.</div></li>
+        <li><span class="glyph">+</span><div><b>manifesto.html</b> — voice statement, EN + KR. Footer link no longer dead.</div></li>
+      </ul>
+      <div class="files">
+        <span class="k">files</span>
+        <a href="landing.css">landing.css</a>
+        <a href="landing-hero.jsx">landing-hero.jsx</a>
+        <a href="changelog.html">changelog.html</a>
+        <a href="manifesto.html">manifesto.html</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Phase 2.5 — tokens -->
+  <article class="entry">
+    <div class="side">
+      <span class="ver">v1.1 · <span class="acc">P2.5</span></span>
+      <span class="date">2026-05-15</span>
+      <span class="tag brand">handoff</span>
+    </div>
+    <div>
+      <h3>Tokens handoff · CSS + Tailwind 4 + JS config</h3>
+      <p class="summary">Production design token contract. One source of truth (<code>tokens.css</code>), two consumers (vanilla CSS, Tailwind 4 <code>@theme inline</code>), JS config as fallback.</p>
+      <ul>
+        <li><span class="glyph">+</span><div><b>assets/tokens.css</b> — 14 color · 9 type sizes · 10 spacing · radii · motion · effects. Light mode is a class flip on the same variable names.</div></li>
+        <li><span class="glyph">+</span><div><b>assets/app.css</b> — Tailwind 4 entry. <code>@import "./tokens.css"</code> + <code>@theme inline</code> binds every var to a utility namespace. No rebuild on theme switch.</div></li>
+        <li><span class="glyph">+</span><div><b>assets/tailwind.config.js</b> — 1:1 JS fallback for tools that need a config object. Kept in lock-step with tokens.css manually (no codegen — manual review is the safety net).</div></li>
+        <li><span class="glyph">+</span><div><b>tokens.html</b> — handoff doc: file previews, live palette, Tailwind↔vanilla parity, cheat sheet, six usage rules.</div></li>
+      </ul>
+      <div class="files">
+        <span class="k">new</span>
+        <a href="assets/tokens.css">tokens.css</a>
+        <a href="assets/app.css">app.css</a>
+        <a href="assets/tailwind.config.js">tailwind.config.js</a>
+        <a href="tokens.html">tokens.html</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Phase 2.4 — store -->
+  <article class="entry">
+    <div class="side">
+      <span class="ver">v1.0 · <span class="acc">P2.4</span></span>
+      <span class="date">2026-05-14</span>
+      <span class="tag brand">store</span>
+    </div>
+    <div>
+      <h3>Store thumbnails · Asset Library + itch.io</h3>
+      <p class="summary">Two surfaces, two conventions. Asset Library = tier name + Free/Paid pill, no price (matches the listing's own price chrome). itch.io = price headline + post-launch note in a badge bar (commerce platform, price is the message).</p>
+      <ul>
+        <li><span class="glyph">+</span><div><b>3 Asset Library 660×440 PNGs</b> — Core (green FREE), Hooks (amber PAID), Plus (violet PAID).</div></li>
+        <li><span class="glyph">+</span><div><b>3 itch.io 630×500 PNGs</b> — Core $0 with green "FREE NOW · FREE FOREVER · MIT" badge swap; Hooks $49 / Plus $69 with amber "PRICES RISE AFTER STEAM LAUNCH" badge.</div></li>
+        <li><span class="glyph">+</span><div>Each asset is reachable as a solo URL <code>store.html?solo=al-core</code> at exact pixel size for OS screenshot export.</div></li>
+      </ul>
+      <div class="files">
+        <span class="k">new</span>
+        <a href="store.html">store.html</a>
+        <span class="k">deps</span>
+        <a href="store.css">store.css</a>
+        <a href="store-app.jsx">store-app.jsx</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Phase 2.3 — social -->
+  <article class="entry">
+    <div class="side">
+      <span class="ver">v1.0 · <span class="acc">P2.3</span></span>
+      <span class="date">2026-05-13</span>
+      <span class="tag brand">social</span>
+    </div>
+    <div>
+      <h3>Social assets · OG + Twitter + Discord</h3>
+      <p class="summary">CRT green single tone (amber / light variants deferred to post-launch). OG and Twitter run distinct compositions on purpose — OG is product card, Twitter leads with the meta-fiction beat. Discord is square + circle-safe.</p>
+      <ul>
+        <li><span class="glyph">+</span><div><b>OG 1200×630</b> — Lockup A + H1 + sub + frozen REWRITE step + real <code>text_corrupt</code> JSON block.</div></li>
+        <li><span class="glyph">+</span><div><b>Twitter 1200×628</b> — "Your player <s>finished</s> <em>skipped</em> the tutorial. Your game <em>noticed</em>." headline.</div></li>
+        <li><span class="glyph">+</span><div><b>Discord 512×512</b> — Lockup B stacked in 410×410 safe-ring; survives both rounded-square (active) and circle (inactive) crops.</div></li>
+        <li><span class="glyph">+</span><div>Solo capture URLs + bulk DevTools snippet + <code>og:</code> / <code>twitter:</code> head tags.</div></li>
+      </ul>
+      <div class="files">
+        <span class="k">new</span>
+        <a href="social.html">social.html</a>
+        <a href="social-og.html">social-og.html</a>
+        <a href="social-twitter.html">social-twitter.html</a>
+        <a href="social-discord.html">social-discord.html</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Phase 2.2 — logo -->
+  <article class="entry">
+    <div class="side">
+      <span class="ver">v1.0 · <span class="acc">P2.2</span></span>
+      <span class="date">2026-05-12</span>
+      <span class="tag brand">logo</span>
+    </div>
+    <div>
+      <h3>Logo export · 8 SVG masters</h3>
+      <p class="summary">Three canonical masters (color · mono black · mono white) plus five derivative SVGs hand-tuned for small sizes and platform icons. <b>No bitmaps shipped</b> — bitmap exports come from these SVGs at build time.</p>
+      <ul>
+        <li><span class="glyph">+</span><div>Canonical: <code>logo-mark-color.svg</code>. Mono: <code>logo-mark-mono-black.svg</code>, <code>logo-mark-mono-white.svg</code>.</div></li>
+        <li><span class="glyph">+</span><div>Favicon: <code>favicon-32.svg</code> (stroke +50%, fragments removed), <code>favicon-16.svg</code> (16×16 native grid, <code>shapeRendering=crispEdges</code>).</div></li>
+        <li><span class="glyph">+</span><div>Platform: <code>apple-touch-icon.svg</code> (180), <code>icon-192.svg</code>, <code>icon-512.svg</code> (PWA + iOS, dark bg + inset).</div></li>
+        <li><span class="glyph">+</span><div>HTML head snippet + <code>site.webmanifest</code> + ImageMagick one-liner for .ico/.png generation.</div></li>
+      </ul>
+      <div class="files">
+        <span class="k">new</span>
+        <a href="logo-export.html">logo-export.html</a>
+        <a href="assets/logo-mark-color.svg">8 × SVG masters in /assets/</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Phase 2.1 — brand system -->
+  <article class="entry">
+    <div class="side">
+      <span class="ver">v1.0 · <span class="acc">P2.1</span></span>
+      <span class="date">2026-05-12</span>
+      <span class="tag brand">system</span>
+    </div>
+    <div>
+      <h3>Brand system v1.0</h3>
+      <p class="summary">First system reference doc. Locks every visual decision from logo through voice into a single page that future cycles cite by section number.</p>
+      <ul>
+        <li><span class="glyph">+</span><div>6 sections: Logo (lockups + construction + don'ts), Color (dark + light palettes + token table), Type (4 families + scale), Spacing (4-base + layout), Components (buttons / pills / kickers / code), Voice (6-axis matrix + EN/KR examples + 6 rules).</div></li>
+        <li><span class="glyph">+</span><div>Donts grid established: no both-strokes-accent, no exaggerated tilt, no gradient on accent, no letters inside frame.</div></li>
+      </ul>
+      <div class="files">
+        <span class="k">new</span>
+        <a href="brand.html">brand.html</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Landing iterations — bundle -->
+  <article class="entry">
+    <div class="side">
+      <span class="ver">v0.6 · <span class="acc">LANDING</span></span>
+      <span class="date">2026-05-10 → 11</span>
+      <span class="tag fix">5 cycles</span>
+    </div>
+    <div>
+      <h3>Landing iterations · brief alignment</h3>
+      <p class="summary">Five rounds against the working brief and the live registry. Each round closed a specific reality gap.</p>
+      <ul>
+        <li><span class="glyph">+</span><div><b>Real schema applied.</b> Hero anim + all hooks cards use registry block names. No invented JSON.</div></li>
+        <li><span class="glyph">+</span><div><b>30 → 35 hooks.</b> Core 13 + Hooks 8 + Plus 14 from <code>scripts/meta/{core,tier_a,tier_b}/*_registry.gd</code>. "Over 30" copy across 7 places. Plus tab shows 8 by default, "Show all 14" toggle for the rest.</div></li>
+        <li><span class="glyph">+</span><div><b>Pricing canon restored.</b> Free / $49 / $69 (post-launch $69 / $149). Studio $299/yr removed entirely.</div></li>
+        <li><span class="glyph">+</span><div><b>Dialogic 2 signal strengthened.</b> Hero sticker pill (violet) + post-Pricing companion banner with self-designed bracket mark.</div></li>
+        <li><span class="glyph">+</span><div><b>Hero 6/6 CHOICE overlap fix.</b> Refactored <code>.hero-anim</code> to 3-row grid; <code>.anim-controls</code> moved out of <code>.dialog-stage</code> with own border + z-index 10. Cache-busted via <code>?v=4</code>.</div></li>
+        <li><span class="glyph">+</span><div><b>Mobile ≤640px breakpoint.</b> 10 surfaces re-tuned: hero h1 44px, nav links collapsed, hooks 1-col with 9.5px code, pricing 1-col, FAQ 2-col grid, footer 2x2 stack.</div></li>
+        <li><span class="glyph">+</span><div>Lint-style cleanup: footer Buy column updated to $49/$69 (Studio removed), FAQ #4 wording, FAQ #3 hook names corrected (no more <code>narrator_reactivity</code>), Korean signal 03 swapped <code>locale_aware</code> → <code>text_i18n</code>.</div></li>
+        <li><span class="glyph">×</span><div><b>Removed:</b> "shipping with parabreak" fake game references row → swapped for honest "compatibility" row (Godot 4.x · Dialogic 2 · MIT · platforms · KNOT early access).</div></li>
+      </ul>
+      <div class="files">
+        <span class="k">files</span>
+        <a href="landing.html">landing.html</a>
+        <a href="landing-hero.jsx">landing-hero.jsx</a>
+        <a href="landing-phase2.jsx">landing-phase2.jsx</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Logo r2 -->
+  <article class="entry">
+    <div class="side">
+      <span class="ver">v0.5 · <span class="acc">LOGO LOCK</span></span>
+      <span class="date">2026-05-09</span>
+      <span class="tag lock">decision</span>
+    </div>
+    <div>
+      <h3>Hybrid lockup locked</h3>
+      <p class="summary">Five concepts narrowed to one direction. 04 "Broken Frame" mark + 01 "bracket-break" wordmark hybrid — same motif on two surfaces. The corner of the frame and the word <code>break</code> do the same thing.</p>
+      <ul>
+        <li><span class="glyph">+</span><div><b>Geometry locked</b>: viewBox 100×100, stroke 6u, square caps, miter joins, break-segment offset +8 / −4, rotation −3°, break-y 56u, clear-space 6u.</div></li>
+        <li><span class="glyph">+</span><div>Lockup A (horizontal · primary), Lockup B (stacked · square placements), section dividers + stickers from the cut 04 wordmark (repurposed, not deleted).</div></li>
+        <li><span class="glyph">×</span><div><b>Rejected:</b> 04's standalone wordmark (para white + break green) — too simple a color split, fails anti-slop rule. Kept only as section dividers.</div></li>
+      </ul>
+      <div class="files">
+        <span class="k">files</span>
+        <a href="logo-r2.html">logo-r2.html</a>
+        <a href="logos.html">logos.html (5 concepts)</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Brief intake -->
+  <article class="entry">
+    <div class="side">
+      <span class="ver">v0.1 · <span class="acc">INTAKE</span></span>
+      <span class="date">2026-05-08</span>
+      <span class="tag lock">brief</span>
+    </div>
+    <div>
+      <h3>Brief intake · operating rules</h3>
+      <p class="summary">Working brief received. Phase 1 decisions captured: dark CRT phosphor green main + light mode via Tweaks, H1 = "The meta engine for Godot.", hero animation = dialogue self-edit, anti-slop strictness = standard, Korean weight = single section (현재 브리프대로).</p>
+      <ul>
+        <li><span class="glyph">+</span><div><b>9 operating rules</b> set: trademark avoidance, no Dialogic logo replication, registry-accurate JSON only, Korean as own copy (not translation), price honesty, etc.</div></li>
+        <li><span class="glyph">+</span><div>Tone slider: 40/100 (just past restrained dev-tool, well short of full Inscryption).</div></li>
+      </ul>
+    </div>
+  </article>
+
+</div>
+
+<footer class="cl-foot">
+  <span>// changelog · </span><span class="acc">design system only · engine commits → repo</span>
+  <div style="margin-top: 18px;">
+    <a href="landing.html">→ landing</a>
+    <a href="brand.html">→ brand</a>
+    <a href="tokens.html">→ tokens</a>
+    <a href="manifesto.html">→ manifesto</a>
+  </div>
+</footer>
+
+</body>
+</html>

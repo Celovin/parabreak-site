@@ -1,0 +1,131 @@
+/* =====================================================================
+   parabreak / app.css
+   ---------------------------------------------------------------------
+   Tailwind 4 entry point. Imports tokens.css and binds every token
+   to a Tailwind utility namespace via @theme inline.
+
+   With Tailwind 4 (PostCSS or Vite plugin):
+     · @import "tailwindcss"  brings the engine
+     · @theme inline  reads existing CSS vars at parse-time and emits
+       utility classes that resolve to those vars at runtime — so the
+       light/dark theme switch is a pure CSS-var swap, no rebuild.
+
+   Drop this file in src/styles/app.css and reference from index.html.
+   v1.0 · 2026-05
+   ===================================================================== */
+
+@import "./tokens.css";
+@import "tailwindcss";
+
+@theme inline {
+  /* ---------- color · namespace bg-*/text-*/border-* ---------- */
+  --color-bg:        var(--color-bg);
+  --color-bg-2:      var(--color-bg-2);
+  --color-panel:     var(--color-panel);
+  --color-line:      var(--color-line);
+  --color-line-2:    var(--color-line-2);
+  --color-ink:       var(--color-ink);
+  --color-ink-2:     var(--color-ink-2);
+  --color-mute:      var(--color-mute);
+  --color-mute-2:    var(--color-mute-2);
+
+  --color-green:     var(--color-green);
+  --color-green-dim: var(--color-green-dim);
+  --color-amber:     var(--color-amber);
+  --color-violet:    var(--color-violet);
+  --color-red:       var(--color-red);
+
+  /* ---------- font · family ---------- */
+  --font-display:  var(--font-display);
+  --font-mono:     var(--font-mono);
+  --font-mono-2:   var(--font-mono-2);
+  --font-kr:       var(--font-kr);
+
+  /* ---------- font · size · text-*/
+  --text-h1:    var(--text-h1);
+  --text-h2:    var(--text-h2);
+  --text-h3:    var(--text-h3);
+  --text-h4:    var(--text-h4);
+  --text-body:  var(--text-body);
+  --text-mono:  var(--text-mono);
+  --text-label: var(--text-label);
+  --text-micro: var(--text-micro);
+
+  /* ---------- spacing — Tailwind merges with its built-in scale ---------- */
+  --spacing-1:  var(--s-1);   /*  4px */
+  --spacing-2:  var(--s-2);   /*  8px */
+  --spacing-3:  var(--s-3);   /* 12px */
+  --spacing-4:  var(--s-4);   /* 16px */
+  --spacing-5:  var(--s-5);   /* 24px */
+  --spacing-6:  var(--s-6);   /* 32px */
+  --spacing-7:  var(--s-7);   /* 48px */
+  --spacing-8:  var(--s-8);   /* 64px */
+  --spacing-9:  var(--s-9);   /* 96px */
+  --spacing-10: var(--s-10);  /* 128px */
+
+  /* ---------- radius ---------- */
+  --radius-0:    var(--radius-0);
+  --radius-1:    var(--radius-1);
+  --radius-2:    var(--radius-2);
+  --radius-pill: var(--radius-pill);
+
+  /* ---------- motion ---------- */
+  --animate-fast:   var(--motion-fast);
+  --animate-base:   var(--motion-base);
+  --animate-slow:   var(--motion-slow);
+
+  /* ---------- container (Tailwind 4 reads this directly) ---------- */
+  --container-max-width: var(--container-max);
+}
+
+/* =====================================================================
+   Component layer — only what Tailwind utilities can't express well.
+   ===================================================================== */
+@layer components {
+  /* hybrid wordmark: para + br'eak with lifted-corner accent */
+  .word {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-ink);
+    display: inline-flex;
+    align-items: baseline;
+  }
+  .word .br {
+    color: var(--color-green);
+    display: inline-block;
+    transform: translateY(-0.13em) rotate(-3deg);
+    margin-left: 0.02em;
+    position: relative;
+  }
+  .word .br::before {
+    content: "";
+    position: absolute;
+    left: -0.08em;
+    right: -0.04em;
+    top: 50%;
+    height: 0.04em;
+    background: var(--color-green);
+    transform: translateY(-1px);
+  }
+
+  /* kicker label */
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--ls-kicker);
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .kicker .num { color: var(--color-green); }
+  .kicker .line {
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--color-green);
+  }
+}

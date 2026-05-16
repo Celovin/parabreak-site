@@ -25,6 +25,15 @@ export const metadata: Metadata = {
   description:
     "Parabreak is a runtime layer that gives your characters access to the things outside the game — the save file, the menu, the player's last session, the system clock. 35 typed hooks for Godot 4.x.",
   metadataBase: new URL("https://parabreak.com"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      en: "/",
+      ko: "/ko",
+      ja: "/ja",
+      "x-default": "/",
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon-32.svg", type: "image/svg+xml", sizes: "32x32" },
